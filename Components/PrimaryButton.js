@@ -1,7 +1,9 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
 const PrimaryButton = (props) => {
-  const pressHandler = () => {};
+  const pressHandler = () => {
+    props.onPress();
+  };
 
   return (
     <View style={styles.buttonOuterContainer}>
