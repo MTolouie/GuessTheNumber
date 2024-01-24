@@ -53,7 +53,7 @@ const GameScreen = (props) => {
 
   useEffect(() => {
     if (guessedNumber === props.userNumber) {
-      props.onGameOver();
+      props.onGameOver(guessRounds.length);
     }
   }, [guessedNumber, props.userNumber, props.userNumber]);
 
@@ -83,6 +83,7 @@ const GameScreen = (props) => {
           </View>
         </View>
       </Card>
+      <View style={styles.listContainer}>
       <FlatList
         data={guessRounds}
         renderItem={(itemData) => (
@@ -90,6 +91,7 @@ const GameScreen = (props) => {
         )}
         keyExtractor={(item) => item}
       ></FlatList>
+      </View>
     </View>
   );
 };
@@ -107,6 +109,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  listContainer: {
+    flex: 1,
+    padding: 16,
   },
 });
 

@@ -34,8 +34,9 @@ export default function App() {
     setNumberOfRounds(0);
   };
 
-  const gameOver = () => {
+  const gameOver = (numberOfRounds) => {
     setIsGameOver(true);
+    setNumberOfRounds(numberOfRounds);
   };
 
   let screen = <StartGameScreen onPickedNumber={pickedNumberHandler} />;
