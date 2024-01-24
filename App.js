@@ -10,6 +10,7 @@ import * as SplashScreen from "expo-splash-screen";
 export default function App() {
   const [pickedNumber, setPickedNumber] = useState();
   const [isGameOver, setIsGameOver] = useState(true);
+  const [numberOfRounds, setNumberOfRounds] = useState(0);
 
   const [fontsLoaded] = useFonts({
     "open-sans": require("./assets/Fonts/OpenSans-Regular.ttf"),
@@ -28,6 +29,11 @@ export default function App() {
     setIsGameOver(false);
   };
 
+  const startNewGameHandler = () => {
+    setPickedNumber(null);
+    setNumberOfRounds(0);
+  };
+
   const gameOver = () => {
     setIsGameOver(true);
   };
@@ -38,7 +44,7 @@ export default function App() {
   }
 
   if (isGameOver && pickedNumber) {
-    screen = <GameOverScreen />;
+    screen = <GameOverScreen userNumber={pickedNumber} roundsNumber={numberOfRounds} onStartNewGame={startNewGameHandler}/>;
   }
 
   return (

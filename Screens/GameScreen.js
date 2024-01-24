@@ -54,6 +54,12 @@ const GameScreen = (props) => {
     }
   }, [guessedNumber, props.userNumber, props.userNumber]);
 
+  useEffect(()=>{
+    minBoundary = 1;
+    maxBoundary = 100;
+  },[]);
+
+
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
