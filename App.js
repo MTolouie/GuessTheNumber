@@ -5,22 +5,36 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import Colors from "./Constants/colors";
 import GameOverScreen from "./Screens/GameOverScreen";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 export default function App() {
   const [pickedNumber, setPickedNumber] = useState();
   const [isGameOver, setIsGameOver] = useState(true);
+
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("./assets/Fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/Fonts/OpenSans-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    SplashScreen.preventAutoHideAsync();
+    return null;
+  }
+
+   SplashScreen.hideAsync();
 
   const pickedNumberHandler = (chosenNumber) => {
     setPickedNumber(chosenNumber);
     setIsGameOver(false);
   };
 
-  const gameOver = ()=>{
+  const gameOver = () => {
     setIsGameOver(true);
-  }
+  };
 
   let screen = <StartGameScreen onPickedNumber={pickedNumberHandler} />;
   if (pickedNumber) {
-    screen = <GameScreen userNumber={pickedNumber} onGameOver={gameOver}/>;
+    screen = <GameScreen userNumber={pickedNumber} onGameOver={gameOver} />;
   }
 
   if (isGameOver && pickedNumber) {
